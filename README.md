@@ -6,9 +6,11 @@ An NLP pipeline for job description extraction, skill clustering, and skill gap 
 ### Phase 1: NER model
 - [x] Load and preprocess SkillSpan dataset (BIO tagging, subword alignment)
 - [x] Fine-tune distilbert-base-uncased on token classification (B-Skill, I-Skill, B-Knowledge, I-Knowledge, O)
-- [ ] Evaluate on SkillSpan test split (precision, recall, F1 via seqeval)
-- [ ] Compare against LLM extraction baseline (Parsec + Claude/GPT)
-- [ ] Train on gold + silver (LLM-generated) data, ablation study across data strategies
+- [x] Evaluate on SkillSpan test split (precision, recall, F1 via seqeval)
+- [x] Compare against LLM extraction baseline (Parsec + Claude/GPT)
+- [x] Train on gold + silver (LLM-generated) data, ablation study across data strategies
+
+```{'eval_loss': 0.37446004152297974, 'eval_model_preparation_time': 0.0007, 'eval_precision': 0.46842936069455404, 'eval_recall': 0.5614947965941344, 'eval_f1': 0.5107573149741825, 'eval_runtime': 21.6223, 'eval_samples_per_second': 146.793, 'eval_steps_per_second': 36.721, 'epoch': 0}```
 
 ### Phase 2: Taxonomy construction
 - [ ] Run NER across bulk job posting corpus (10k+ JDs)

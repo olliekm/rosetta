@@ -12,12 +12,6 @@ label_list = ["O", "B-Skill", "I-Skill", "B-Knowledge", "I-Knowledge"]
 
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
-model = AutoModelForTokenClassification.from_pretrained(
-    "distilbert-base-uncased",
-    num_labels=len(label_list)
-)
-
-
 # Dataset: SkillSpan (Zhang et al., 2022)
 # https://aclanthology.org/2022.naacl-main.366
 
@@ -139,6 +133,8 @@ def compute_metrics(eval_pred):
         "f1": seqeval_metrics.f1_score(true_labels, true_preds),
     }
 
+model = AutoModelForTokenClassification.from_pretrained("./skillgraph-ner/checkpoint-3000")
+tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
 trainer = Trainer(
     model=model,
@@ -149,4 +145,7 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
-trainer.train()
+results = trainer.evaluate()
+print(results)
+
+# trainer.train()
