@@ -3,6 +3,7 @@ import time
 import numpy as np
 import pandas as pd
 import torch
+from collections import Counter
 from seqeval import metrics as seqeval_metrics
 from datasets import Dataset
 from transformers import (AutoModelForTokenClassification, 
@@ -183,6 +184,32 @@ for model_config in test_models:
     trainer.train()
     train_time = time.time() - start
 
+    predictions = trainer.predict(test_dataset)
+    preds = np.argmax(predictions.predictions, axis=-1)
+    labels = predictions.label_ids
+
+    confusion = Counter()
+    for pred_seq, label_seq in zip(preds, labels):
+        for p, l in zip(pred_seq, label_seq):
+            if l == -100:
+                continue
+            pred_label = id2label[p]
+            true_label = id2label[l]
+            if pred_label != true_label:
+                confusion[(true_label, pred_label)] += 1
+
+    # saving error samples
+    samples = []
+    for i in range(min(20, len(test_data))):
+        tokens = test_data[i]["tokens"]
+        true_tags = test_data[i]["tags"]
+        pred_tags = [id2label[p] for p, l in zip(preds[i], labels[i]) if l != -100]
+        samples.append({"tokens": tokens, "true": true_tags, "pred": pred_tags})
+
+    with open(f"error_samples_{model_name.replace('/', '_')}.json", "w") as f:
+        json.dump(samples, f, indent=2)
+
+
     # get inference lantency
     model.eval()
     batch_samples = [test_dataset[i] for i in range(min(32, len(test_dataset)))]
@@ -204,11 +231,13 @@ for model_config in test_models:
     dev_results = trainer.evaluate(dev_dataset)
     test_results = trainer.evaluate(test_dataset)
 
-    test_results = trainer.evaluate(test_dataset)
     test_results["model"] = model_name
     test_results["train_time"] = train_time
     test_results["num_params"] = model.num_parameters()
     test_results["avg_inference_latency"] = avg_inference_time
+    test_results["dev_f1"] = dev_results["eval_f1"]
+    test_results["overfit_gap"] = dev_results["eval_f1"] - test_results["eval_f1"]
+    test_results["top_confusion"] = confusion.most_common(5)
 
     all_results.append(test_results)
 
