@@ -1,9 +1,4 @@
-# Rosetta 🌹
-
-An analysis of distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan dataset. 
-
-
-## Model Comparison Analysis
+# Model Comparison Analysis
 Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan dataset
 
 
@@ -106,7 +101,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
 
 
 
-### Performance Metrics Comparison
+## Performance Metrics Comparison
 
 
 
@@ -171,7 +166,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
 
 
 
-### Performance Visualization
+## Performance Visualization
 
 
     
@@ -179,7 +174,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
     
 
 
-### Efficiency Metrics
+## Efficiency Metrics
 
 
 
@@ -217,7 +212,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
 
 
 
-### Overfitting Analysis
+## Overfitting Analysis
 
 
     
@@ -228,7 +223,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
     ✓ Both models show minimal overfitting (gap < 0.02)
 
 
-### Error Analysis
+## Error Analysis
 
     Top Confusion Pairs (True Label → Predicted Label)
     ============================================================
@@ -254,7 +249,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
     
 
 
-### Sample Predictions
+## Sample Predictions
 
     Sample Predictions (distilbert-base-uncased)
     ======================================================================
@@ -286,7 +281,7 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
     java                 B-Knowledge     B-Knowledge     ✓
 
 
-### Summary
+## Summary
 
     
     KEY FINDINGS
@@ -315,22 +310,3 @@ Comparing distilbert-base-uncased vs distilbert-base-cased for NER on SkillSpan 
     RECOMMENDATION: Use distilbert-base-uncased for skill/knowledge extraction.
     
 
-
-
-## Citation
-
-If you use this code or the SkillSpan dataset, please cite:
-
-```bibtex
-@inproceedings{zhang-etal-2022-skillspan,
-    title = "{S}kill{S}pan: Hard and Soft Skill Extraction from {E}nglish Job Postings",
-    author = "Zhang, Mike  and
-      Jensen, Kristian N{\o}rgaard  and
-      Sonniks, Sif  and
-      Plank, Barbara",
-    booktitle = "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
-    month = jul,
-    year = "2022",
-    url = "https://aclanthology.org/2022.naacl-main.366",
-    pages = "4962--4984",
-}

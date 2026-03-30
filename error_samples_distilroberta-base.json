@@ -1,0 +1,342 @@
+[
+  {
+    "tokens": [
+      "Full",
+      "Stack",
+      "Software",
+      "Engineer",
+      "-",
+      "Java",
+      "/",
+      "JavaScript"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "<ORGANIZATION>",
+      "<ORGANIZATION>",
+      "<ORGANIZATION>",
+      "<ORGANIZATION>",
+      "."
+    ],
+    "true": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "<ADDRESS>",
+      "<ADDRESS>",
+      "<LOCATION>",
+      "-",
+      "<LOCATION>"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Date",
+      "posted:",
+      "2021-03-04"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Likes:",
+      "0",
+      "Dislikes:",
+      "0",
+      "Love:",
+      "0"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Salary:",
+      "<SALARY>"
+    ],
+    "true": [
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Job",
+      "type:",
+      "FULL_TIME"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Experience",
+      "level:",
+      "<EXPERIENCE>"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Industry:",
+      "<INDUSTRY>"
+    ],
+    "true": [
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Company",
+      "size:",
+      "<SIZE>"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Company",
+      "type:",
+      "<COMPANY_TYPE>"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Technologies:"
+    ],
+    "true": [
+      "O"
+    ],
+    "pred": [
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "javascript",
+      "reactjs",
+      "java"
+    ],
+    "true": [
+      "B-Knowledge",
+      "B-Knowledge",
+      "B-Knowledge"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Job",
+      "description:"
+    ],
+    "true": [
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Job",
+      "type:"
+    ],
+    "true": [
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Full-time"
+    ],
+    "true": [
+      "O"
+    ],
+    "pred": [
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Role:"
+    ],
+    "true": [
+      "O"
+    ],
+    "pred": [
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Full",
+      "Stack",
+      "Developer"
+    ],
+    "true": [
+      "O",
+      "O",
+      "O"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "Technologies"
+    ],
+    "true": [
+      "O"
+    ],
+    "pred": [
+      "O"
+    ]
+  },
+  {
+    "tokens": [
+      "javascript",
+      "reactjs",
+      "java"
+    ],
+    "true": [
+      "B-Knowledge",
+      "B-Knowledge",
+      "B-Knowledge"
+    ],
+    "pred": [
+      "O",
+      "O",
+      "O"
+    ]
+  }
+]

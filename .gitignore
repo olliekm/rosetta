@@ -1,3 +1,4 @@
 .env
 /json
 /skillgraph-ner
+/model-comparison

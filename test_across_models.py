@@ -1,3 +1,4 @@
+import gc
 import json
 import time
 import numpy as np
@@ -12,30 +13,18 @@ from transformers import (AutoModelForTokenClassification,
                           Trainer, 
                           DataCollatorForTokenClassification)
 
-label_list = ["O", "B-Skill", "I-Skill", "B-Knowledge", "I-Knowledge"]
-
 test_models = [
     {"name": "distilbert-base-uncased"},
     {"name": "distilbert-base-cased"},
-    {"name": "bert-base-uncased"},
-    {"name": "bert-base-cased"},
-    {"name": "jjzha/jobbert-base-cased"},
-    {"name": "microsoft/deberta-v3-base", "add_prefix_space": True},
-    {"name": "roberta-base", "add_prefix_space": True},
     {"name": "distilroberta-base", "add_prefix_space": True},
 ]
 
-def load_skillspan(file_path):
-    example = []
-    with open(file_path) as f:
-        for line in f:
-            row = json.loads(line)
-            example.append({
-                "tokens": row['tokens'],
-                "tags": merge_tags(row['tags_skill'], row['tags_knowledge'])
-            })
-
-    return example
+# Larger models (may need CPU or more memory):
+# {"name": "bert-base-uncased"},
+# {"name": "bert-base-cased"},
+# {"name": "jjzha/jobbert-base-cased"},
+# {"name": "microsoft/deberta-v3-base", "add_prefix_space": True},
+# {"name": "roberta-base", "add_prefix_space": True},
 
 # merging tags to avoid loss of data
 def merge_tags(skill_tags, knowledge_tags):
@@ -52,6 +41,19 @@ def merge_tags(skill_tags, knowledge_tags):
         else:
             merged.append("O")
     return merged
+
+
+def load_skillspan(file_path):
+    example = []
+    with open(file_path) as f:
+        for line in f:
+            row = json.loads(line)
+            example.append({
+                "tokens": row['tokens'],
+                "tags": merge_tags(row['tags_skill'], row['tags_knowledge'])
+            })
+
+    return example
 
 
 def tokenize_and_align(example, tokenizer, label2id):
@@ -121,6 +123,7 @@ all_results = []
 
 for model_config in test_models:
     model_name = model_config["name"]
+    print(f"\n{'='*50}\nTraining: {model_name}\n{'='*50}")
     add_prefix_space = model_config.get("add_prefix_space", False)
     tokenizer = AutoTokenizer.from_pretrained(model_name, add_prefix_space=add_prefix_space)
 
@@ -152,15 +155,16 @@ for model_config in test_models:
     training_args = TrainingArguments(
         output_dir=f'./model-comparison/{model_name.replace("/", "_")}',
         num_train_epochs=5,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
-        gradient_accumulation_steps=4,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        gradient_accumulation_steps=1,
         learning_rate=2e-5,
         weight_decay=0.01,
         eval_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
-        metric_for_best_model="f1"
+        metric_for_best_model="f1",
+        use_cpu=True
     )
 
     model = AutoModelForTokenClassification.from_pretrained(
@@ -241,6 +245,11 @@ for model_config in test_models:
 
     all_results.append(test_results)
 
+    # Free memory before next model
+    del model
+    del trainer
+    gc.collect()
+
 df = pd.DataFrame(all_results)
-print(df.sort_values("f1", ascending=False))
+print(df.sort_values("eval_f1", ascending=False))
 df.to_csv("model_comparison.csv", index=False)
